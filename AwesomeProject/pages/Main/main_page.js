@@ -39,6 +39,7 @@ export default function MainPage({ navigation }) {
     const handleTextChange = (text) => {
         setSearchText(text);
     };
+    
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
@@ -93,8 +94,8 @@ export default function MainPage({ navigation }) {
                 </View>
             </Modal>
 
-            <EmergencyButton />
             <MapScreen />
-    </SafeAreaView>
-    );
-            }
+            <EmergencyButton />
+        </SafeAreaView>
+    )
+}
