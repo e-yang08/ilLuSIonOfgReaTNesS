@@ -6,16 +6,22 @@ import AddEmergencyContactsPage from "./pages/UserAuthentication/SignUpEmergency
 import InitialShareLocationPage from "./pages/UserAuthentication/SignUpShareLoc";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import MainPage from './pages/Main/main_page';
+//import { PaperProvider } from "react-native-paper";
 
 export default function App() {
   const AppStack = createStackNavigator();
   return (
     <NavigationContainer>
-      <AppStack.Navigator>
+       <AppStack.Navigator
+        screenOptions={{
+          headerShown:false,
+      }}>
         <AppStack.Screen name="Login" component={LoginPage} />
         <AppStack.Screen name="Register" component={RegistrationPage} />
         <AppStack.Screen name="AddEmergencyContacts" component={ AddEmergencyContactsPage } />
         <AppStack.Screen name="InitialShareLocation" component={InitialShareLocationPage} />
+        <AppStack.Screen name="Main" component={MainPage} />
       </AppStack.Navigator>
     </NavigationContainer>
   );
