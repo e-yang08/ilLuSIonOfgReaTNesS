@@ -1,10 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import LoginPage from './pages/Login/login';
-import RegistrationPage from './pages/Login/registration';
+import LoginPage from './pages/UserAuthentication/LogIn';
+import RegistrationPage from './pages/UserAuthentication/SignUp';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from "@react-navigation/stack";
-import { PaperProvider } from "react-native-paper";
+//import { PaperProvider } from "react-native-paper";
 
 export default function App() {
   const AppStack = createStackNavigator();
