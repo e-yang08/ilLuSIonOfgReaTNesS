@@ -66,9 +66,10 @@ export default function EmergencyButton() {
           zIndex: 1000,
           width: 200,
         justifyContent: 'center',
-    alignItems: 'center',
+          alignItems: 'center',
+        borderRadius:20
       }}>
-        <Text>{emergencyText}</Text>
+          <Text style={{ fontWeight: 'bold' }}>{emergencyText}</Text>
       </View>
       </TouchableWithoutFeedback>
       </View>

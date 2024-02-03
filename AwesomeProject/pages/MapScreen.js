@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import MapView from 'react-native-maps';
+import MapView, { Marker } from 'react-native-maps';
+import bookmarksData from '../backend/bookmarks.json'
 
 const MapScreen = () => {
   const handleMapPress = (e) => {
@@ -18,8 +19,20 @@ const MapScreen = () => {
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         }}
-        onPress={handleMapPress}
-      />
+        onPress={handleMapPress}>
+        {bookmarksData.map(marker => (
+          <Marker
+            key={marker.id}
+            coordinate={{
+              latitude: marker.lat,
+              longitude: marker.lon,
+            }}
+            title={marker.tag}
+            pinColor={ marker.tag=='police'?'blue': marker.tag=='hospital'? 'orange':'green' }
+          />
+        ))}
+
+        </MapView>
     </View>
   );
 };
