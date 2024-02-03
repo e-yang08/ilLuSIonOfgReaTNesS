@@ -1,9 +1,11 @@
 import { Text, View, SafeAreaView, TouchableWithoutFeedback, Modal, Pressable, Alert, StyleSheet } from "react-native"
 import React, { useState, useRef } from 'react';
+import { SearchBar } from 'react-native-elements';
 export default function MainPage({ navigation }) {
     const [isPressed, setIsPressed] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);
     const pressTimeout = useRef(null);
+    const [searchText, setSearchText] = useState('');
     const handlePressIn = () => {
         pressTimeout.current = setTimeout(() => {
         setIsPressed(true);
@@ -18,33 +20,50 @@ export default function MainPage({ navigation }) {
             setIsPressed(false);
         }
     };
+    const handleSearch = () => {
+        // Perform search based on the searchText
+        console.log('Performing search for:', searchText);
+    };
+
+    const handleTextChange = (text) => {
+        setSearchText(text);
+    };
+
     return (
         <SafeAreaView>
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          Alert.alert('Modal has been closed.');
-          setModalVisible(!modalVisible);
-        }}>
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Text style={styles.modalText}>Emergency notifications sent!</Text>
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}>
-              <Text style={styles.textStyle}>Close</Text>
-            </Pressable>
-          </View>
-        </View>
-      </Modal>
+            <SearchBar
+                placeholder="Type here..."
+                onChangeText={handleTextChange}
+                onSubmitEditing={handleSearch}
+                value={searchText}
+                lightTheme
+            />
 
-    <TouchableWithoutFeedback onPressIn={handlePressIn} onPressOut={handlePressOut}>
-      <View style={{ padding: 20, backgroundColor: isPressed ? 'green' : 'red' }}>
-        <Text>Emergency</Text>
-      </View>
-    </TouchableWithoutFeedback>
+            <Modal
+                animationType="slide"
+                transparent={true}
+                visible={modalVisible}
+                onRequestClose={() => {
+                Alert.alert('Modal has been closed.');
+                setModalVisible(!modalVisible);
+                }}>
+                <View style={styles.centeredView}>
+                <View style={styles.modalView}>
+                    <Text style={styles.modalText}>Emergency notifications sent!</Text>
+                    <Pressable
+                    style={[styles.button, styles.buttonClose]}
+                    onPress={() => setModalVisible(!modalVisible)}>
+                    <Text style={styles.textStyle}>Close</Text>
+                    </Pressable>
+                </View>
+                </View>
+            </Modal>
+
+            <TouchableWithoutFeedback onPressIn={handlePressIn} onPressOut={handlePressOut}>
+            <View style={{ padding: 20, backgroundColor: isPressed ? 'green' : 'red' }}>
+                <Text>Emergency</Text>
+            </View>
+            </TouchableWithoutFeedback>
         </SafeAreaView>
     )
 }
