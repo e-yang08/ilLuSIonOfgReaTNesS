@@ -4,11 +4,11 @@ import Geocoder from 'react-native-geocoding';
 import { GOOGLE_API_KEY, AMADEUS_CLIENT_ID, AMADEUS_CLIENT_SECRET } from '@env';
 
 
-const SafetyInfo = () => {
+const SafetyInfo = ({address}) => {
     const [coords, setCoords] = useState('loading...');
     const [lat, setLat] = useState('');
     const [long, setLong] = useState('');
-    const [safety, setSafety] = useState('loading...');
+    const [safety, setSafety] = useState('...');
     const [loading, setIsLoading] = useState(false);
     const [token, setToken] = useState('');
 
@@ -85,6 +85,16 @@ const SafetyInfo = () => {
             setIsLoading(false);
         }
     };
+    function formatKey(key) {
+        let formattedKey = key.charAt(0).toUpperCase();
+        for (let i = 1; i < key.length; i++) {
+            if (key.charAt(i) === key.charAt(i).toUpperCase()) {
+                formattedKey += ' ';
+            }
+            formattedKey += key.charAt(i);
+        }
+        return formattedKey;
+    }
 
     useEffect(() => {
         fetchToken();
@@ -96,37 +106,84 @@ const SafetyInfo = () => {
         }
     }, [lat, long, token]); 
 
+    useEffect(() => {
+        if (!address) return; // Exit if no address is provided
     
-    const geocode = () => {
-        // Function to fetch latitude and longitude from address
-
-        useEffect(() => {
-            Geocoder.init(GOOGLE_API_KEY, { language: "en" }); // Use your actual Google API key
-            Geocoder.from("16 Turk", {
+        Geocoder.init(GOOGLE_API_KEY, { language: "en" });
+        Geocoder.from(address,
+            // Hard-coded bounds for San Francisco
+            {
                 northeast: { lat: 37.83, lng: -122.34 },
                 southwest: { lat: 37.63, lng: -122.55 }
-            })
-                .then(json => {
-                    const location = json.results[0].geometry.location;
-                    setLat(location.lat);
-                    setLong(location.lng);
-                    const latLngString = `${location.lat}, ${location.lng}`;
-                    setCoords(latLngString);
-                })
-                .catch(error => console.warn(error));
-        }, []);
-    };
+            }
 
-    geocode();
+            )
+            .then(json => {
+                const location = json.results[0].geometry.location;
+                setLat(location.lat);
+                setLong(location.lng);
+                const latLngString = `${location.lat}, ${location.lng}`;
+                setCoords(latLngString);
+                // Now that lat and long are updated, getSafetyRating will be triggered
+            })
+            .catch(error => console.warn(error));
+    }, [address]);
+    
+    function getColor(value) {
+        if (value >= 0 && value <= 24) {
+            return 'green';
+        } else if (value >= 25 && value <= 49) {
+            return 'yellowgreen';
+        } else if (value >= 50 && value <= 74) {
+            return 'orange';
+        } else if (value >= 75 && value <= 100) {
+            return 'red';
+        }
+    }
+
 
     return (
-        <View>
-            <Text>Map Component</Text>
-            <Text>{coords}</Text>
-            <Text>{ 
-            // map the safety scores to a string
-            Object.entries(safety).map(([key, value]) => `${key}: ${value}`).join('\n')
-            }</Text>
+        <View style={{marginBottom: 10}}>
+            <Text style={{ fontWeight: 'bold', fontSize: 18 }}>Danger Around {address}
+            </Text>
+
+            <Text style={{color: 'darkgrey', fontWeight: 'bold', marginBottom: 10 }}>
+                Likelihood of danger from 1 (safe) to 100 (dangerous).
+            </Text>
+
+
+            <Text style={{ color: getColor(safety.overall), fontWeight: 'bold', fontSize: 16, marginBottom: 10 }}>
+                Overall: {safety.overall}
+            </Text>
+
+            <Text style={{ color: getColor(safety.women), fontWeight: 'bold' }}>
+                Against Women: {safety.women}
+            </Text>
+
+            <Text style={{ color: getColor(safety.lgbtq), fontWeight: 'bold' }}>
+                Against LGBTQ: {safety.lgbtq}
+            </Text>
+
+            <Text style={{ color: getColor(safety.theft), fontWeight: 'bold' }}>
+                Theft: {safety.theft}
+            </Text>
+
+            <Text style={{ color: getColor(safety.politicalFreedom), fontWeight: 'bold' }}>
+                Political: {safety.politicalFreedom}
+            </Text>
+
+            <Text style={{ color: getColor(safety.medical), fontWeight: 'bold' }}>
+                Medical: {safety.medical}
+            </Text>
+
+            <Text style={{ color: getColor(safety.physicalHarm), fontWeight: 'bold' }}>
+                Physical Harm: {safety.physicalHarm}
+                {'\n'} {/* Line break */}
+            </Text>
+
+            
+
+
         </View>
     );
 };
