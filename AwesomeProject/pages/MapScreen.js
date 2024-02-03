@@ -59,7 +59,8 @@ const MapScreen = () => {
           longitude: marker.lon,
         }}
         //provider={PROVIDER_GOOGLE}
-        onPress={handleMapPress}>
+        onPress={handleMapPress} />))}
+        
         {bookmarksData.map(marker => (
           <Marker
             key={marker.id}
@@ -73,6 +74,7 @@ const MapScreen = () => {
           />))}
         {neighborhoodData.map(n => (
           <Polygon
+            key={n['neighborhood']}
             coordinates={n['coordinates'].map(coords => {
               return {
                 "latitude": coords[1],
