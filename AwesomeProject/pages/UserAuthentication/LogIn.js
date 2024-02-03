@@ -25,7 +25,7 @@ export default function LoginPage({ navigation }) {
         </TouchableOpacity>
 
         <View style={{flexDirection:'row', justifyContent:'center', marginBottom:30}}>
-        <Text> New to the app?</Text>
+        <Text> New to the app? </Text>
         <TouchableOpacity onPress={()=>{navigation.navigate("Register")}}>
             <Text style={{color:'#7455f6', fontWeight:700}}>Register</Text>
         </TouchableOpacity>
