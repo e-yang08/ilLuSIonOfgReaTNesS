@@ -3,21 +3,32 @@ import React, { useState, useRef } from 'react';
 import { SearchBar } from 'react-native-elements';
 export default function MainPage({ navigation }) {
     const [isPressed, setIsPressed] = useState(false);
+    const [isTriggered, setTriggered] = useState(false);
+    const [emergencyText, setEmergencyText]=useState("Emergency")
     const [modalVisible, setModalVisible] = useState(false);
     const pressTimeout = useRef(null);
     const [searchText, setSearchText] = useState('');
     const handlePressIn = () => {
-        pressTimeout.current = setTimeout(() => {
-        setIsPressed(true);
-        }, 3000); // 3000 milliseconds (3 seconds)
+        if (!isTriggered) {
+            setIsPressed(true);
+                setEmergencyText("Hold for 3 seconds..")
+                pressTimeout.current = setTimeout(() => {
+                    setTriggered(true)
+                }, 3000); // 3000 milliseconds (3 seconds)        
+        }
+    
     };
     const handlePressOut = () => {
         clearTimeout(pressTimeout.current);
-        if (isPressed) {
+        setIsPressed(false);
+        if (isTriggered) {
             // Handle long press action here
             console.log('Button was long-pressed!');
             setModalVisible(true)
-            setIsPressed(false);
+            //setTriggered(false);
+            setEmergencyText("Emergency Triggered")
+        } else {
+            setEmergencyText("Emergency")
         }
     };
     const handleSearch = () => {
@@ -28,6 +39,9 @@ export default function MainPage({ navigation }) {
     const handleTextChange = (text) => {
         setSearchText(text);
     };
+    
+    const buttonColor = (isPressed && !isTriggered) ? '#B71C1C': (isTriggered)?'#B0BEC5':'#F44336';
+
 
     return (
         <SafeAreaView>
@@ -60,8 +74,8 @@ export default function MainPage({ navigation }) {
             </Modal>
 
             <TouchableWithoutFeedback onPressIn={handlePressIn} onPressOut={handlePressOut}>
-            <View style={{ padding: 20, backgroundColor: isPressed ? 'green' : 'red' }}>
-                <Text>Emergency</Text>
+            <View style={{ padding: 20, backgroundColor: buttonColor }}>
+                <Text>{emergencyText}</Text>
             </View>
             </TouchableWithoutFeedback>
         </SafeAreaView>
