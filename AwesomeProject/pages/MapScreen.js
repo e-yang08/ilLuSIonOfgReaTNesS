@@ -50,17 +50,7 @@ const MapScreen = () => {
       longitudeDelta: 0.0421,
     }}
     onPress={() => setSelectedMarker(null)} // Add this line
->
-    {bookmarksData.map((marker) => (
-      <Marker
-        key={marker.id}
-        coordinate={{
-          latitude: marker.lat,
-          longitude: marker.lon,
-        }}
-        //provider={PROVIDER_GOOGLE}
-        onPress={handleMapPress} />))}
-        
+>        
         {bookmarksData.map(marker => (
           <Marker
             key={marker.id}
@@ -71,6 +61,7 @@ const MapScreen = () => {
             title={marker.tag}
             pinColor={marker.tag == 'Police' ? 'blue' : marker.tag == 'Hospital' ? 'orange' : 'green'}
             description={marker.description}
+            onPress={() => handleMarkerPress(marker)} // Update to use handleMarkerPress
           />))}
         {neighborhoodData.map(n => (
           <Polygon
