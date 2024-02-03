@@ -41,13 +41,20 @@ const MapScreen = () => {
             pinColor={marker.tag == 'Police' ? 'blue' : marker.tag == 'Hospital' ? 'orange' : 'green'}
             description={marker.description}
           />))}
-
+        {neighborhoodData.map(n => (
           <Polygon
-            coordinates={polygonCoordinates}
+            coordinates={n['coordinates'].map(coords => {
+              return {
+                "latitude": coords[1],
+                "longitude": coords[0]
+              }
+            })}
             fillColor="rgba(100, 100, 200, 0.3)"
-            strokeWidth={2}
+            strokeWidth={0.5}
             />
 
+        ))
+          }
 
         </MapView>
     </View>
