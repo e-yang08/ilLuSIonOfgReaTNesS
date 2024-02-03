@@ -8,9 +8,10 @@ const SafetyInfo = ({address}) => {
     const [coords, setCoords] = useState('loading...');
     const [lat, setLat] = useState('');
     const [long, setLong] = useState('');
-    const [safety, setSafety] = useState('...');
+    const [safety, setSafety] = useState('');
     const [loading, setIsLoading] = useState(false);
     const [token, setToken] = useState('');
+    const [error, setError] = useState(''); 
 
     // Function to fetch the token
     const fetchToken = async () => {
@@ -85,16 +86,7 @@ const SafetyInfo = ({address}) => {
             setIsLoading(false);
         }
     };
-    function formatKey(key) {
-        let formattedKey = key.charAt(0).toUpperCase();
-        for (let i = 1; i < key.length; i++) {
-            if (key.charAt(i) === key.charAt(i).toUpperCase()) {
-                formattedKey += ' ';
-            }
-            formattedKey += key.charAt(i);
-        }
-        return formattedKey;
-    }
+
 
     useEffect(() => {
         fetchToken();
@@ -116,76 +108,76 @@ const SafetyInfo = ({address}) => {
                 northeast: { lat: 37.83, lng: -122.34 },
                 southwest: { lat: 37.63, lng: -122.55 }
             }
-
-            )
-            .then(json => {
-                const location = json.results[0].geometry.location;
-                setLat(location.lat);
-                setLong(location.lng);
-                const latLngString = `${location.lat}, ${location.lng}`;
-                setCoords(latLngString);
-                // Now that lat and long are updated, getSafetyRating will be triggered
-            })
-            .catch(error => console.warn(error));
-    }, [address]);
-    
-    function getColor(value) {
-        if (value >= 0 && value <= 24) {
-            return 'green';
-        } else if (value >= 25 && value <= 49) {
-            return 'yellowgreen';
-        } else if (value >= 50 && value <= 74) {
-            return 'orange';
-        } else if (value >= 75 && value <= 100) {
-            return 'red';
-        }
-    }
-
-
-    return (
-        <View style={{marginBottom: 10}}>
-            <Text style={{ fontWeight: 'bold', fontSize: 18 }}>Danger Around {address}
-            </Text>
-
-            <Text style={{color: 'darkgrey', fontWeight: 'bold', marginBottom: 10 }}>
-                Likelihood of danger from 1 (safe) to 100 (dangerous).
-            </Text>
-
-
-            <Text style={{ color: getColor(safety.overall), fontWeight: 'bold', fontSize: 16, marginBottom: 10 }}>
-                Overall: {safety.overall}
-            </Text>
-
-            <Text style={{ color: getColor(safety.women), fontWeight: 'bold' }}>
-                Against Women: {safety.women}
-            </Text>
-
-            <Text style={{ color: getColor(safety.lgbtq), fontWeight: 'bold' }}>
-                Against LGBTQ: {safety.lgbtq}
-            </Text>
-
-            <Text style={{ color: getColor(safety.theft), fontWeight: 'bold' }}>
-                Theft: {safety.theft}
-            </Text>
-
-            <Text style={{ color: getColor(safety.politicalFreedom), fontWeight: 'bold' }}>
-                Political: {safety.politicalFreedom}
-            </Text>
-
-            <Text style={{ color: getColor(safety.medical), fontWeight: 'bold' }}>
-                Medical: {safety.medical}
-            </Text>
-
-            <Text style={{ color: getColor(safety.physicalHarm), fontWeight: 'bold' }}>
-                Physical Harm: {safety.physicalHarm}
-                {'\n'} {/* Line break */}
-            </Text>
-
+        )
+        .then(json => {
+            const location = json.results[0].geometry.location;
+            setLat(location.lat);
+            setLong(location.lng);
+            const latLngString = `${location.lat}, ${location.lng}`;
+            setCoords(latLngString);
+            // Now that lat and long are updated, getSafetyRating will be triggered
+        })
+        .catch(error => {
+            if (error.origin.status === 'ZERO_RESULTS') {
+                setError("No results were found. Please try entering the address again.");
+            }
+                console.log('⚠️⚠️⚠️⚠️⚠️ERROR!!', error);
             
+        });
+        }, [address]);
+            
+        function getColor(value) {
+            if (value >= 0 && value <= 24) {
+                return 'green';
+            } else if (value >= 25 && value <= 49) {
+                return 'gold';
+            } else if (value >= 50 && value <= 74) {
+                return 'orange';
+            } else if (value >= 75 && value <= 100) {
+                return 'red';
+            }
+        }
 
 
-        </View>
-    );
-};
+        return (
+            <View>
+                {/* Display error if present */}
+                {error ? (
+                    <Text style={{margin: 4, textAlign: 'center', color: 'red', fontWeight: 'bold'}}>{error}
+                    {'\n'}
+                    </Text>
+                ) : (
+                    // Conditional rendering based on safety data
+                    safety !== '' ? (
+                        <View>
+                            <Text style={{ fontWeight: 'bold', fontSize: 18 }}>Danger Around {address}
+                            </Text><Text style={{ color: 'darkgrey', fontWeight: 'bold', marginBottom: 10 }}>
+                                    Likelihood of danger from 1 (safe) to 100 (dangerous).
+                                </Text><Text style={{ color: getColor(safety.overall), fontWeight: 'bold', fontSize: 16, marginBottom: 10 }}>
+                                    Overall: {safety.overall?.toFixed(1)}
+                                </Text><Text style={{ color: getColor(safety.women), fontWeight: 'bold' }}>
+                                    Against Women: {safety.women?.toFixed(1)}
+                                </Text><Text style={{ color: getColor(safety.lgbtq), fontWeight: 'bold' }}>
+                                    Against LGBTQ: {safety.lgbtq?.toFixed(1)}
+                                </Text><Text style={{ color: getColor(safety.theft), fontWeight: 'bold' }}>
+                                    Theft: {safety.theft?.toFixed(1)}
+                                </Text><Text style={{ color: getColor(safety.politicalFreedom), fontWeight: 'bold' }}>
+                                    Political Freedom: {safety.politicalFreedom?.toFixed(1)}
+                                </Text><Text style={{ color: getColor(safety.medical), fontWeight: 'bold' }}>
+                                    Medical: {safety.medical?.toFixed(1)}
+                                </Text><Text style={{ color: getColor(safety.physicalHarm), fontWeight: 'bold' }}>
+                                    Physical Harm: {safety.physicalHarm?.toFixed(1)}
+                                    {'\n'} {/* Line break */}
+                                </Text>
+                        </View>
+                    ) : (
+                        <Text>Loading...</Text>
+                    )
+                )}
+            </View>
+        );
+    };
+
+
 
 export default SafetyInfo;
