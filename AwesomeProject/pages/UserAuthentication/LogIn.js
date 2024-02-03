@@ -20,7 +20,7 @@ export default function LoginPage({ navigation }) {
         </Text>
         <InputField label={'Email address'} icon={<MaterialIcons name='alternate-email' size={20} color='#666'style={{marginRight:5}}/>} keyboardType={'email-address'} value={email} onChangeFunc={(text)=>setEmail(text)}/>
         <InputField label={'Password'} icon={<Ionicons name='lock-closed-outline' size={20} color='#666'style={{marginRight:5}}/>} inputType={'password'} fieldButtonLabel={'Forgot?'} value={password} onChangeFunc={(text)=>setPassword(text)}/>
-        <TouchableOpacity style={{backgroundColor:'#7455f6', padding:20, borderRadius:10, marginBottom:30}} /*onPress={onPressLogin}*/>
+        <TouchableOpacity style={{backgroundColor:'#7455f6', padding:20, borderRadius:10, marginBottom:30}} onPress={()=>{navigation.navigate("Main")}}>
             <Text style={{textAlign:'center', fontWeight:700, color:'#FFF'}}>Login</Text>
         </TouchableOpacity>
 
