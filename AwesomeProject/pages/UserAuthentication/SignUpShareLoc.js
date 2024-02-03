@@ -1,54 +1,132 @@
+import React, { useState } from "react";
 import {
-  Button,
-  SafeAreaView,
   View,
-  Text,
-  TextInput,
+  Alert,
   TouchableOpacity,
-  Image,
+  Text,
+  Linking,
+  SafeAreaView,
 } from "react-native";
-import { useState } from "react";
-import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-import Ionicons from "react-native-vector-icons/Ionicons";
-import InputField from "../../components/input-field";
-import Geolocation from "@react-native-community/geolocation";
-
-const requestLocationPermission = () => {
-  Geolocation.requestAuthorization();
-};
-
-const getCurrentLocation = () => {
-  Geolocation.getCurrentPosition(
-    (position) => {
-      console.log("Current Location:", position.coords);
-    },
-    (error) => {
-      console.error("Error getting location:", error);
-    },
-    { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
-  );
-};
+import * as Location from "expo-location";
 
 export default function InitialShareLocationPage({ navigation }) {
-  // const [name, setName] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [confirmPassword, setConfirmPassword] = useState("");
+  const [locationPermission, setLocationPermission] = useState(null);
+  const [hasSharedLocation, setHasSharedLocation] = useState(false);
+
+  const getLocationPermission = async () => {
+    try {
+      const { status } = await Location.requestForegroundPermissionsAsync();
+      setLocationPermission(status);
+    } catch (error) {
+      console.error("Error while requesting location permission:", error);
+    }
+  };
+
+  const handleLocationPermission = async () => {
+    await getLocationPermission();
+    setHasSharedLocation(true);
+  };
+
+  // if permission is denied, trigger to open settings
+  const openSettings = () => {
+    Linking.openSettings();
+  };
+  const handleLocationPermissionSettings = () => {
+    if (locationPermission !== "granted") {
+      console.log(locationPermission);
+      Alert.alert(
+        "Location Access Denied",
+        "Please go to settings and enable location access for this app.",
+        [
+          { text: "Cancel", style: "cancel" },
+          { text: "Open Settings", onPress: openSettings },
+        ]
+      );
+    } else {
+      openSettings();
+    }
+  };
 
   return (
     <SafeAreaView style={{ flex: 1, justifyContent: "center" }}>
       <View style={{ paddingHorizontal: 25 }}>
-        {/* onPress={() => {
-            navigation.navigate("Main"); */}
-        <View
-          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+        <Text
+          style={{
+            fontSize: 28,
+            fontWeight: "500",
+            color: "#333",
+          }}
         >
-          <Button
-            title="Request Location Permission"
-            onPress={requestLocationPermission}
-          />
-          <Button title="Get Current Location" onPress={getCurrentLocation} />
-        </View>
+          Share Location
+        </Text>
+        <Text
+          style={{
+            fontSize: 14,
+            fontWeight: "500",
+            color: "#333",
+            marginBottom: 50,
+          }}
+        >
+          Choose{" "}
+          <Text
+            style={{
+              fontWeight: "800",
+            }}
+          >
+            "Allow While Using App"
+          </Text>
+          so that we can assist you when you are in danger.
+        </Text>
+
+        {!hasSharedLocation && (
+          <TouchableOpacity
+            style={{
+              backgroundColor: "#7455f6",
+              padding: 20,
+              borderRadius: 10,
+            }}
+            onPress={handleLocationPermission}
+          >
+            <Text
+              style={{ textAlign: "center", fontWeight: 700, color: "#FFF" }}
+            >
+              Press to allow sharing location
+            </Text>
+          </TouchableOpacity>
+        )}
+        {locationPermission === "granted" && (
+          <TouchableOpacity
+            style={{
+              backgroundColor: "#7455f6",
+              padding: 20,
+              borderRadius: 10,
+            }}
+            onPress={() => {
+              navigation.navigate("Login");
+            }}
+          >
+            <Text
+              style={{ textAlign: "center", fontWeight: 700, color: "#FFF" }}
+            >
+              Register
+            </Text>
+          </TouchableOpacity>
+        )}
+
+        <TouchableOpacity
+          style={{
+            backgroundColor: "rgba(0, 0, 0, 0)",
+            padding: 20,
+            borderRadius: 10,
+          }}
+          onPress={handleLocationPermissionSettings}
+        >
+          <Text
+            style={{ textAlign: "center", fontWeight: 500, color: "#808080" }}
+          >
+            Change the location permission
+          </Text>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );

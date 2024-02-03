@@ -11,10 +11,12 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import InputField from "../../components/input-field";
 export default function AddEmergencyContactsPage({ navigation }) {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [name1, setName1] = useState("");
+  const [phoneNum1, setPhoneNum1] = useState("");
+  const [name2, setName2] = useState("");
+  const [phoneNum2, setPhoneNum2] = useState("");
+  const [name3, setName3] = useState("");
+  const [phoneNum3, setPhoneNum3] = useState("");
 
   return (
     <SafeAreaView style={{ flex: 1, justifyContent: "center" }}>
@@ -38,6 +40,16 @@ export default function AddEmergencyContactsPage({ navigation }) {
         >
           Add 2-3 people that you want to notify when you are in risk.
         </Text>
+
+        <Text
+          style={{
+            fontSize: 14,
+            color: "#333",
+            marginBottom: 10,
+          }}
+        >
+          Contact 1
+        </Text>
         <InputField
           label={"Full name"}
           icon={
@@ -48,8 +60,8 @@ export default function AddEmergencyContactsPage({ navigation }) {
               style={{ marginRight: 5 }}
             />
           }
-          value={name}
-          onChangeFunc={(text) => setName(text)}
+          value={name1}
+          onChangeFunc={(text) => setName1(text)}
         />
         <InputField
           label={"Phone Number"}
@@ -61,9 +73,83 @@ export default function AddEmergencyContactsPage({ navigation }) {
               style={{ marginRight: 5 }}
             />
           }
-          keyboardType={"email-address"}
-          onChangeFunc={(text) => setEmail(text)}
-          value={email}
+          keyboardType={"phone-pad"}
+          value={phoneNum1}
+          onChangeFunc={(text) => setPhoneNum1(text)}
+        />
+
+        <Text
+          style={{
+            fontSize: 14,
+            color: "#333",
+            marginBottom: 10,
+          }}
+        >
+          Contact 2
+        </Text>
+        <InputField
+          label={"Full name"}
+          icon={
+            <Ionicons
+              name="person-outline"
+              size={20}
+              color="#666"
+              style={{ marginRight: 5 }}
+            />
+          }
+          value={name2}
+          onChangeFunc={(text) => setName2(text)}
+        />
+        <InputField
+          label={"Phone Number"}
+          icon={
+            <MaterialIcons
+              name="local-phone"
+              size={20}
+              color="#666"
+              style={{ marginRight: 5 }}
+            />
+          }
+          keyboardType={"phone-pad"}
+          value={phoneNum2}
+          onChangeFunc={(text) => setPhoneNum2(text)}
+        />
+
+        <Text
+          style={{
+            fontSize: 14,
+            color: "#333",
+            marginBottom: 10,
+          }}
+        >
+          Contact 3
+        </Text>
+        <InputField
+          label={"Full name"}
+          icon={
+            <Ionicons
+              name="person-outline"
+              size={20}
+              color="#666"
+              style={{ marginRight: 5 }}
+            />
+          }
+          value={name3}
+          onChangeFunc={(text) => setName3(text)}
+        />
+        <InputField
+          label={"Phone Number"}
+          icon={
+            <MaterialIcons
+              name="local-phone"
+              size={20}
+              color="#666"
+              style={{ marginRight: 5 }}
+            />
+          }
+          keyboardType={"phone-pad"}
+          value={phoneNum3}
+          onChangeFunc={(text) => setPhoneNum3(text)}
         />
 
         <TouchableOpacity
@@ -78,7 +164,7 @@ export default function AddEmergencyContactsPage({ navigation }) {
           }}
         >
           <Text style={{ textAlign: "center", fontWeight: 700, color: "#FFF" }}>
-            Next
+            One more step!
           </Text>
         </TouchableOpacity>
       </View>
