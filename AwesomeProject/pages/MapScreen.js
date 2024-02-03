@@ -1,8 +1,10 @@
 import React from 'react';
 import { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
-import MapView, { Marker } from 'react-native-maps';
-import bookmarksData from '../backend/bookmarks.json';
+import MapView, { Marker, PROVIDER_GOOGLE, Polygon } from 'react-native-maps';
+import bookmarksData from '../backend/data/bookmarks.json'
+import neighborhoodData from '../backend/data/neighborhoods.json'
+import { useEffect } from 'react';
 import { Button } from 'react-native-elements';
 import { Linking } from 'react-native';
 
@@ -31,6 +33,12 @@ const MapScreen = () => {
     
   };
 
+  const polygonCoordinates = neighborhoodData.map(coords => {
+    return {
+        "latitude": coords[1],
+        "longitude": coords[0]
+    };
+  })
   return (
     <View style={styles.container}>
       <MapView
@@ -50,11 +58,32 @@ const MapScreen = () => {
           latitude: marker.lat,
           longitude: marker.lon,
         }}
-        title={marker.tag}
-        pinColor={marker.tag === 'police' ? 'blue' : marker.tag === 'hospital' ? 'orange' : 'green'}
-        onPress={() => handleMarkerPress(marker)} // Update to use handleMarkerPress
-      />
-    ))}
+        //provider={PROVIDER_GOOGLE}
+        onPress={handleMapPress}>
+        {bookmarksData.map(marker => (
+          <Marker
+            key={marker.id}
+            coordinate={{
+              latitude: marker.lat,
+              longitude: marker.lon,
+            }}
+            title={marker.tag}
+            pinColor={marker.tag == 'Police' ? 'blue' : marker.tag == 'Hospital' ? 'orange' : 'green'}
+            description={marker.description}
+          />))}
+        {neighborhoodData.map(n => (
+          <Polygon
+            coordinates={n['coordinates'].map(coords => {
+              return {
+                "latitude": coords[1],
+                "longitude": coords[0]
+              }
+            })}
+            fillColor="rgba(100, 100, 200, 0.3)"
+            strokeWidth={0.5}
+            />
+        ))
+          }
     </MapView>
 
     {selectedMarker && (
