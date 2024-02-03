@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Text, View, SafeAreaView, TouchableWithoutFeedback, Modal, Pressable } from "react-native";
 import styles from '../pages/Main/MainPageStyles';
 import * as Location from 'expo-location';
-import bookmarksData from '../backend/bookmarks.json';
+import bookmarksData from '../backend/data/bookmarks.json';
 import { Linking } from 'react-native';
 
 
