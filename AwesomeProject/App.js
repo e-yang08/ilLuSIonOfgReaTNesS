@@ -1,13 +1,27 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import LoginPage from './pages/Login/login';
+import RegistrationPage from './pages/Login/registration';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from "@react-navigation/stack";
 
 export default function App() {
+  const AppStack = createStackNavigator();
   return (
+    <NavigationContainer>
+      <AppStack.Navigator>
+        <AppStack.Screen name='Login' component={LoginPage}/>
+        <AppStack.Screen name='Register' component={RegistrationPage}/>
+      </AppStack.Navigator>
+
+    </NavigationContainer>
+  )
+
+  /*return (
     <View style={styles.container}>
-      <LoginPage/>
+      <RegistrationPage/>
     </View>
-  );
+  );*/
 }
 
 const styles = StyleSheet.create({
