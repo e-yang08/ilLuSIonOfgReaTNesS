@@ -90,7 +90,7 @@ export default function InitialShareLocationPage({ navigation }) {
             <Text
               style={{ textAlign: "center", fontWeight: 700, color: "#FFF" }}
             >
-              Press to allow sharing location
+              Press to share location
             </Text>
           </TouchableOpacity>
         )}
