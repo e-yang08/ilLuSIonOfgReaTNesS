@@ -7,7 +7,7 @@ export default function LoginPage({ navigation }) {
     const [email, setEmail]=useState('');
     const [password, setPassword]=useState('');
     return(
-                <SafeAreaView style={{flex:1, justifyContent:'center'}}>
+         <SafeAreaView style={{flex:1, justifyContent:'center'}}>
         <View style={{paddingHorizontal:25}}>
         <Text 
             style={{
@@ -31,9 +31,9 @@ export default function LoginPage({ navigation }) {
         </TouchableOpacity>
 
         </View>
-        
+
         </View>
-        
+
     </SafeAreaView >
     )
 }

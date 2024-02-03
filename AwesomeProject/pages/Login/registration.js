@@ -25,16 +25,16 @@ export default  function RegistrationPage({ navigation }){
 
             <InputField label={'Password'} icon={<Ionicons name='lock-closed-outline' size={20} color='#666'style={{marginRight:5}}/>} inputType={'password'} value={password} onChangeFunc={(text)=>setPassword(text)}/>
             <InputField label={'Confirm password'} icon={<Ionicons name='lock-closed-outline' size={20} color='#666'style={{marginRight:5}}/>} inputType={'password'} value={confirmPassword} onChangeFunc={(text)=>setConfirmPassword(text)}/>
-            
+
 
             <TouchableOpacity style={{backgroundColor:'#7455f6', padding:20, borderRadius:10, marginBottom:30}} /*onPress={onRegisterPress}*/>
                 <Text style={{textAlign:'center', fontWeight:700, color:'#FFF'}}>Create account</Text>
             </TouchableOpacity>
 
-            
-            
+
+
             </View>
-            
+
         </SafeAreaView>
     )
 }
