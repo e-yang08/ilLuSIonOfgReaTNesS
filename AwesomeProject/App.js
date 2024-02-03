@@ -4,6 +4,7 @@ import LoginPage from './pages/Login/login';
 import RegistrationPage from './pages/Login/registration';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from "@react-navigation/stack";
+import { PaperProvider } from "react-native-paper";
 
 export default function App() {
   const AppStack = createStackNavigator();
@@ -19,7 +20,7 @@ export default function App() {
 
   /*return (
     <View style={styles.container}>
-      <RegistrationPage/>
+      <LoginPage />
     </View>
   );*/
 }
@@ -27,8 +28,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
