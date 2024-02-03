@@ -150,29 +150,36 @@ const SafetyInfo = ({address}) => {
                     // Conditional rendering based on safety data
                     safety !== '' ? (
                         <View>
-                            <Text style={{ fontWeight: 'bold', fontSize: 18 }}>Danger Around {address}
-                            </Text><Text style={{ color: 'darkgrey', fontWeight: 'bold', marginBottom: 10 }}>
-                                    Likelihood of danger from 1 (safe) to 100 (dangerous).
-                                </Text><Text style={{ color: getColor(safety.overall), fontWeight: 'bold', fontSize: 16, marginBottom: 10 }}>
-                                    Overall: {safety.overall?.toFixed(1)}
-                                </Text><Text style={{ color: getColor(safety.women), fontWeight: 'bold' }}>
-                                    Against Women: {safety.women?.toFixed(1)}
-                                </Text><Text style={{ color: getColor(safety.lgbtq), fontWeight: 'bold' }}>
-                                    Against LGBTQ: {safety.lgbtq?.toFixed(1)}
-                                </Text><Text style={{ color: getColor(safety.theft), fontWeight: 'bold' }}>
-                                    Theft: {safety.theft?.toFixed(1)}
-                                </Text><Text style={{ color: getColor(safety.politicalFreedom), fontWeight: 'bold' }}>
-                                    Political Freedom: {safety.politicalFreedom?.toFixed(1)}
-                                </Text><Text style={{ color: getColor(safety.medical), fontWeight: 'bold' }}>
-                                    Medical: {safety.medical?.toFixed(1)}
-                                </Text><Text style={{ color: getColor(safety.physicalHarm), fontWeight: 'bold' }}>
-                                    Physical Harm: {safety.physicalHarm?.toFixed(1)}
-                                    {'\n'} {/* Line break */}
-                                </Text>
+                            <Text style={{ fontWeight: 'bold', fontSize: 18 }}>Danger Around {address}</Text>
+                            <Text style={{ color: 'darkgrey', fontWeight: 'bold', marginBottom: 10, marginRight: 1 }}>
+                                Likelihood of danger from 1 (safe) to 100 (dangerous).
+                            </Text>
+                            <Text style={{ color: 'black', fontWeight: 'bold', fontSize: 16, marginBottom: 10 }}>
+                                Overall: <Text style={{ color: getColor(safety.overall) }}>{safety.overall?.toFixed(1)}</Text>
+                            </Text>
+                            <Text style={{ color: 'black', fontWeight: 'bold' }}>
+                                Against Women: <Text style={{ color: getColor(safety.women), fontWeight: 'bold' }}>{safety.women?.toFixed(1)}</Text>
+                            </Text>
+                            <Text style={{ color: 'black', fontWeight: 'bold' }}>
+                                Against LGBTQ: <Text style={{ color: getColor(safety.lgbtq), fontWeight: 'bold' }}>{safety.lgbtq?.toFixed(1)}</Text>
+                            </Text>
+                            <Text style={{ color: 'black', fontWeight: 'bold' }}>
+                                Theft: <Text style={{ color: getColor(safety.theft), fontWeight: 'bold' }}>{safety.theft?.toFixed(1)}</Text>
+                            </Text>
+                            <Text style={{ color: 'black', fontWeight: 'bold' }}>
+                                Political Freedom: <Text style={{ color: getColor(safety.politicalFreedom), fontWeight: 'bold' }}>{safety.politicalFreedom?.toFixed(1)}</Text>
+                            </Text>
+                            <Text style={{ color: 'black', fontWeight: 'bold' }}>
+                                Medical: <Text style={{ color: getColor(safety.medical), fontWeight: 'bold' }}>{safety.medical?.toFixed(1)}</Text>
+                            </Text>
+                            <Text style={{ color: 'black', fontWeight: 'bold' }}>
+                                Physical Harm: <Text style={{ color: getColor(safety.physicalHarm), fontWeight: 'bold' }}>{safety.physicalHarm?.toFixed(1)}</Text>{'\n'}
+                            </Text>
                         </View>
                     ) : (
                         <Text>Loading...</Text>
                     )
+
                 )}
             </View>
         );
