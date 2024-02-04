@@ -27,6 +27,9 @@ Contributed by [Alina](https://www.linkedin.com/in/alina-erofeeva-minerva), [Ere
 - [Appendix and FAQ](#Appendix-and-FAQ)
 
 ## Demo of the application
+[Here is the link](https://youtu.be/pXoK_k9YqB0) to our Demo video.
+
+Below are some pictures from mobile application.
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between;">
  <img src="https://hackmd.io/_uploads/HJ3tEQp9T.jpg" alt="photo_1" width="200"/>
  <img src="https://hackmd.io/_uploads/BJ3tVmac6.jpg" alt="photo_2" width="200"/>
