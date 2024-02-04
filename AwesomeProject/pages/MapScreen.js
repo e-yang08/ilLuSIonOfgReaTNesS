@@ -32,6 +32,9 @@ const MapScreen = () => {
     // Use these coordinates to interact with Google API or other services
     
   };
+const getColorWithAlpha = (hue, saturation, lightness, alpha) => {
+  return `hsla(${hue}, ${saturation}%, ${lightness}%, ${alpha})`;
+};
 
   const polygonCoordinates = neighborhoodData.map(coords => {
     return {
@@ -72,7 +75,7 @@ const MapScreen = () => {
                 "longitude": coords[0]
               }
             })}
-            fillColor="rgba(100, 100, 200, 0.3)"
+            fillColor={ getColorWithAlpha(30, 100, 50, (n['safety'] / 10)*1.2)}
             strokeWidth={0.5}
             />
         ))
