@@ -7,7 +7,7 @@ Guardianess
  
 :tada:	Welcome! Thank you for visiting our page!
 
-"Guardianess" is a mobile application created by 4 passionate female engineering students to elevate women's safety. In our personal experience, we did not feel particularly safe on the streets of San Francisco, US. There is no application with centralized information about safety and tangible sources on where to go in a dangerous situation.
+"Guardianess" is a mobile application (iOS and Android compatible) created by 4 passionate female engineering students to elevate women's safety. In our personal experience, we did not feel particularly safe on the streets of San Francisco, US. There is no application with centralized information about safety and tangible sources on where to go in a dangerous situation.
 
 In an emergency scenario, one is likely to panic and feel frightened. The application provides a sense of assurance when navigating through the streets, provides a tangible sense of security, and potentially could save lives in an emergency. 
 
@@ -62,9 +62,7 @@ Feature: Find the closest safe location
 
 
 ## How to use our app
-
-If you are a total beginner to this, start here!
-
+Follow the following 5 steps to try our application.
 1. Clone our repository `git clone <url>`
 2. `npm install` to install dependencies
 3. Install `ExpoGo` from App Store/Play Market
