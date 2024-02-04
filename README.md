@@ -144,4 +144,7 @@ If we have more time to develop, here are some  features we find meaningful to i
 
 ## Appendix and FAQ
 
-:information_source:	**Find this document incomplete?** Leave a comment!
+:information_source: For the Safety ratings displayed on our application we are using [Safe Places API](https://developers.amadeus.com/self-service/category/covid-19-and-travel-safety/api-doc/safe-place/api-reference). Their scores come from GeoSure GeoSafeScores, which are (1) updated regularly and (2) based on a variety of sources, data science methods, and surveys of locals residing in the areas. You can read more about GeoSafeScores [here](https://geosureglobal.com/faq).
+
+
+**Find this document incomplete?** Leave a comment!
