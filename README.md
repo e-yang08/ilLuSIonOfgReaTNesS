@@ -11,7 +11,7 @@ Guardianess
 
 In an emergency scenario, one is likely to panic and feel frightened. The application provides a sense of assurance when navigating through the streets, provides a tangible sense of security, and potentially could save lives in an emergency. 
 
-Submitted to Black Wings Hack 2024 as a team `Illusion of Greatness`
+Submitted to Black Wings Hack 2024 as a team `Illusion of Greatness` -- [**DevPost**](https://devpost.com/software/guardiness?ref_content=my-projects-tab&ref_feature=my_projects)
 
 
 Contributed by [Alina](https://www.linkedin.com/in/alina-erofeeva-minerva), [Erela](https://linkedin.com/in/erela-yang-snow), [Ivanna](https://www.linkedin.com/in/ivanna-kreshchenetska/), & [Polina](https://www.linkedin.com/in/polina-vishnevskaya/) with :heartpulse:.
@@ -27,7 +27,7 @@ Contributed by [Alina](https://www.linkedin.com/in/alina-erofeeva-minerva), [Ere
 - [Appendix and FAQ](#Appendix-and-FAQ)
 
 ## Demo of the application
-[Here is the link](https://youtu.be/pXoK_k9YqB0) to our Demo video.
+Here is the link to [Demo](https://youtu.be/pXoK_k9YqB0).
 
 Below are some pictures from mobile application.
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between;">
