@@ -1,8 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, Linking, Text, TouchableOpacity } from "react-native";
-import MapView, { Marker, PROVIDER_GOOGLE, Polygon, Callout } from "react-native-maps";
+import {
+  View,
+  StyleSheet,
+  Linking,
+  Text,
+  TouchableOpacity,
+} from "react-native";
+import MapView, {
+  Marker,
+  PROVIDER_GOOGLE,
+  Polygon,
+  Callout,
+} from "react-native-maps";
 import { Button } from "react-native-elements";
-
 
 import bookmarksData from "../backend/data/bookmarks.json";
 import neighborhoodData from "../backend/data/neighborhoods.json";
@@ -29,10 +39,12 @@ const MapScreen = ({ selectedLoc }) => {
     flashButton(); // Call flashButton when a marker is pressed
   };
 
-  const handleMapPress = (e) => {
-    const { latitude, longitude } = e.nativeEvent.coordinate;
-    // Use these coordinates to interact with Google API or other services
-  };
+  // const handleMapPress = (e) => {
+  //     console.log("coord", e.nativeEvent.coordinate);
+  //     const { latitude, longitude } = e.nativeEvent.coordinate;
+  //     // Use these coordinates to interact with Google API or other services
+  // };
+
   const getColorWithAlpha = (hue, saturation, lightness, alpha) => {
     return `hsla(${hue}, ${saturation}%, ${lightness}%, ${alpha})`;
   };
@@ -46,17 +58,21 @@ const MapScreen = ({ selectedLoc }) => {
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         }}
-        region={ selectedLoc ? ({
-          latitude: selectedLoc.latitude+0.02,
-          longitude: selectedLoc.longitude,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
-        }) : selectedLoc}
+        region={
+          selectedLoc
+            ? {
+                latitude: selectedLoc.latitude + 0.02,
+                longitude: selectedLoc.longitude,
+                latitudeDelta: 0.0922,
+                longitudeDelta: 0.0421,
+              }
+            : selectedLoc
+        }
         showsUserLocation={true}
         zoomEnabled={true}
         zoomControlEnabled={true}
         provider={PROVIDER_GOOGLE}
-        onPress={handleMapPress}
+        // onPress={handleMapPress}
       >
         {selectedLoc && (
           <Marker
@@ -70,40 +86,43 @@ const MapScreen = ({ selectedLoc }) => {
 
         {/* without marker parencesis? */}
         {bookmarksData.map((marker) => (
-            <Marker
-              key={marker.id}
-              coordinate={{
-                latitude: marker.lat,
-                longitude: marker.lon,
-              }}
-              style={{margin: 2}}
-              title={marker.tag}
-              pinColor={
-                marker.tag == "Police"
-                  ? "blue"
-                  : marker.tag == "Hospital"
-                  ? "orange"
-                  : "green"
-              }
-                description={marker.description}
-              onPress={() => handleMarkerPress(marker)} // Update to use handleMarkerPress
+          <Marker
+            key={marker.id}
+            coordinate={{
+              latitude: marker.lat,
+              longitude: marker.lon,
+            }}
+            style={{ margin: 2 }}
+            title={marker.tag}
+            pinColor={
+              marker.tag == "Police"
+                ? "blue"
+                : marker.tag == "Hospital"
+                ? "orange"
+                : "green"
+            }
+            description={marker.description}
+            onPress={() => handleMarkerPress(marker)} // Update to use handleMarkerPress
+          >
+            <Callout
+              style={{ margin: 2 }}
+              onPress={() => openGoogleMaps(marker.lat, marker.lon)}
             >
-              <Callout 
-              style={{margin: 2}}
-                onPress={() => openGoogleMaps(marker.lat, marker.lon)}>
-              <View
-              style={styles.calloutView}
-              >
-                <Text style={{fontWeight: '500', fontSize: 15}}>{marker.tag}</Text>
+              <View style={styles.calloutView}>
+                <Text style={{ fontWeight: "500", fontSize: 15 }}>
+                  {marker.tag}
+                </Text>
                 <Text>{marker.description}</Text>
-                <TouchableOpacity style={styles.directionsButton} onPress={() => openGoogleMaps(marker.lat, marker.lon) }>
+                <TouchableOpacity
+                  style={styles.directionsButton}
+                  onPress={() => openGoogleMaps(marker.lat, marker.lon)}
+                >
                   <Text style={styles.directionsButtonText}>
-                      Get Directions
-                    </Text>
-                </TouchableOpacity>              
-            </View>
+                    Get Directions
+                  </Text>
+                </TouchableOpacity>
+              </View>
             </Callout>
-          
           </Marker>
         ))}
         {neighborhoodData.map((n) => (
@@ -120,7 +139,6 @@ const MapScreen = ({ selectedLoc }) => {
           />
         ))}
       </MapView>
- 
     </View>
   );
 };
@@ -138,25 +156,25 @@ const styles = StyleSheet.create({
     marginTop: 8,
     marginBottom: 20,
     borderWidth: 1,
-    borderColor: 'red',
-    borderRadius: 5, 
+    borderColor: "red",
+    borderRadius: 5,
     paddingVertical: 8,
     paddingHorizontal: 12,
-    backgroundColor: 'blue',
+    backgroundColor: "blue",
     // alignSelf: 'flex-start',
-    justifyContent: 'center', 
-    alignContent: 'center', 
+    justifyContent: "center",
+    alignContent: "center",
   },
 
   directionsButtonText: {
-    color: 'white', 
-    fontWeight: '500',
-    textAlign: 'center', 
+    color: "white",
+    fontWeight: "500",
+    textAlign: "center",
   },
   calloutView: {
     padding: 10,
-    alignItems: 'center', // Center content horizontally
-    justifyContent: 'center', // Center content vertically
+    alignItems: "center", // Center content horizontally
+    justifyContent: "center", // Center content vertically
   },
 });
 
