@@ -18,12 +18,32 @@ Contributed by [Alina](https://www.linkedin.com/in/alina-erofeeva-minerva), [Ere
 
 **Table of Contents**
 
+- [Demo of the application] (#Demo-of-the-application)
 - [User Story](#User-story)
 - [How to use our application](#How-to-use-our-app)
 - [User Flows](#User-flows)
 - [Project Timeline](#Project-timeline)
 - [Future Directions](#Future-directions)
 - [Appendix and FAQ](#Appendix-and-FAQ)
+
+## Demo of the application
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between;">
+ <img src="https://hackmd.io/_uploads/HJ3tEQp9T.jpg" alt="photo_1" width="200"/>
+ <img src="https://hackmd.io/_uploads/BJ3tVmac6.jpg" alt="photo_2" width="200"/>
+ <img src="https://hackmd.io/_uploads/B12tVQa56.jpg" alt="photo_3" width="200"/>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between;">
+<img src="https://hackmd.io/_uploads/rJhY4m6qT.jpg" alt="photo_4" width="200"/>
+<img src="https://hackmd.io/_uploads/H1ntVQTq6.jpg" alt="photo_5" width="200"/>
+<img src="https://hackmd.io/_uploads/B1htNmpcT.jpg" alt="photo_6" width="200"/>
+</div>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between;">
+<img src="https://hackmd.io/_uploads/rkhF476qT.jpg" alt="photo_7" width="200"/>
+<img src="https://hackmd.io/_uploads/B12F47656.jpg" alt="photo_8" width="200"/>
+<img src="https://hackmd.io/_uploads/Hk3tEQ656.jpg" alt="photo_9" width="200"/>
+<img src="https://hackmd.io/_uploads/SJnK4Qpq6.jpg" alt="photo_10" width="200"/>
+</div>
 
 ## User story
 ---
