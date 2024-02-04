@@ -1,53 +1,46 @@
 import React, { useState, useRef } from "react";
-import {
-  Text,
-  View,
-  SafeAreaView,
-  Modal,
-  Pressable,
-} from "react-native";
-// import { SearchBar } from "react-native-elements";
+import { Text, View, SafeAreaView, Modal, Pressable } from "react-native";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import MapScreen from "../MapScreen";
 import EmergencyButton from "../../components/EmergencyButton";
 import styles from "./MainPageStyles";
 import SafetyInfo from "../../backend/SafetyInfo";
-import { GOOGLE_API_KEY, AMADEUS_CLIENT_ID, AMADEUS_CLIENT_SECRET } from "@env";
+import { GOOGLE_API_KEY } from "@env";
 
 export default function MainPage({ navigation }) {
-  const [isPressed, setIsPressed] = useState(false);
+  //   const [isPressed, setIsPressed] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [addressModalVisible, setAddressModalVisible] = useState(false);
-  const pressTimeout = useRef(null);
-  const [searchText, setSearchText] = useState("");
+  //   const pressTimeout = useRef(null);
+  //   const [searchText, setSearchText] = useState("");
   const [address, setAddress] = useState("");
-  const [safetyInfo, setSafetyInfo] = useState("");
+  //   const [safetyInfo, setSafetyInfo] = useState("");
 
-  const handlePressIn = () => {
-    pressTimeout.current = setTimeout(() => {
-      setIsPressed(true);
-    }, 3000); // 3000 milliseconds (3 seconds)
-  };
+  //   const handlePressIn = () => {
+  //     pressTimeout.current = setTimeout(() => {
+  //       setIsPressed(true);
+  //     }, 3000); // 3000 milliseconds (3 seconds)
+  //   };
 
-  const handlePressOut = () => {
-    clearTimeout(pressTimeout.current);
-    if (isPressed) {
-      // Handle long press action here
-      console.log("Button was long-pressed!");
-      setModalVisible(true);
-      setIsPressed(false);
-    }
-  };
+  //   const handlePressOut = () => {
+  //     clearTimeout(pressTimeout.current);
+  //     if (isPressed) {
+  //       // Handle long press action here
+  //       console.log("Button was long-pressed!");
+  //       setModalVisible(true);
+  //       setIsPressed(false);
+  //     }
+  //   };
 
-  const handleSearch = () => {
-    // Perform search based on the searchText
-    console.log("Performing search for:", searchText);
-    setAddressModalVisible();
-  };
+  //   const handleSearch = () => {
+  //     // Perform search based on the searchText
+  //     console.log("Performing search for:", searchText);
+  //     setAddressModalVisible();
+  //   };
 
-  const handleTextChange = (text) => {
-    setSearchText(text);
-  };
+  //   const handleTextChange = (text) => {
+  //     setSearchText(text);
+  //   };
 
   const [selectedLocation, setSelectedLocation] = useState(null);
 
@@ -59,13 +52,12 @@ export default function MainPage({ navigation }) {
 
     const { formatted_address } = details;
     setAddress(formatted_address);
-    
+
     const { geometry } = details;
     // console.log(geometry);
     const { location } = geometry;
     // console.log(location);
     const { lat, lng } = location;
-    
 
     setSelectedLocation({
       latitude: lat,
@@ -73,18 +65,16 @@ export default function MainPage({ navigation }) {
       latitudeDelta: 0.02,
       longitudeDelta: 0.02,
     });
-    console.log(address, 'NAMENAMENAME')
+    console.log(address, "address");
 
     setAddressModalVisible(true);
-
-
   };
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <MapScreen selectedLoc={selectedLocation} />
       <View style={styles.searchContainer}>
-        {/* </View> */}
+        {/* Google Search ENgine */}
         <GooglePlacesAutocomplete
           placeholder="Search..."
           enablePoweredByContainer={false}
@@ -105,14 +95,6 @@ export default function MainPage({ navigation }) {
           }}
         />
       </View>
-
-      {/* <SearchBar
-        placeholder="Type here..."
-        onChangeText={handleTextChange}
-        onSubmitEditing={handleSearch}
-        value={searchText}
-        lightTheme
-      /> */}
 
       {/* Modal for Displaying Emergency Notification Information */}
       <Modal
@@ -138,8 +120,6 @@ export default function MainPage({ navigation }) {
       </Modal>
 
       {/* Modal for Displaying Safety Information */}
-        
-
       {selectedLocation !== null && addressModalVisible && (
         <Modal
           animationType="slide"
@@ -153,7 +133,11 @@ export default function MainPage({ navigation }) {
           <View style={styles.toppedView}>
             <View style={styles.modalTopView}>
               {/* Pass searchText as a prop to SafetyInfo or fetch data here and pass it down */}
-              <SafetyInfo address={address} lat={selectedLocation.latitude} long={selectedLocation.longitude} />
+              <SafetyInfo
+                address={address}
+                lat={selectedLocation.latitude}
+                long={selectedLocation.longitude}
+              />
               <Pressable
                 style={[styles.button, styles.buttonClose]}
                 onPress={() => setAddressModalVisible(!addressModalVisible)}
