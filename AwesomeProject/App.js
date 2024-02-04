@@ -7,7 +7,6 @@ import InitialShareLocationPage from "./pages/UserAuthentication/SignUpShareLoc"
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import MainPage from './pages/Main/main_page';
-//import { PaperProvider } from "react-native-paper";
 
 export default function App() {
   const AppStack = createStackNavigator();
