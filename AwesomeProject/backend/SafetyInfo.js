@@ -213,6 +213,18 @@ const SafetyInfo = ({ address, lat, long }) => {
             </Text>
           </Text>
           <Text style={{ color: "black", fontWeight: "bold" }}>
+            Physical Harm:{" "}
+            <Text
+              style={{
+                color: getColor(safety.physicalHarm),
+                fontWeight: "bold",
+              }}
+            >
+              {safety.physicalHarm?.toFixed(1)}
+            </Text>
+            {"\n"}
+          </Text>
+          <Text style={{ color: "black", fontWeight: "bold" }}>
             Political Freedom:{" "}
             <Text
               style={{
@@ -231,18 +243,7 @@ const SafetyInfo = ({ address, lat, long }) => {
               {safety.medical?.toFixed(1)}
             </Text>
           </Text>
-          <Text style={{ color: "black", fontWeight: "bold" }}>
-            Physical Harm:{" "}
-            <Text
-              style={{
-                color: getColor(safety.physicalHarm),
-                fontWeight: "bold",
-              }}
-            >
-              {safety.physicalHarm?.toFixed(1)}
-            </Text>
-            {"\n"}
-          </Text>
+
         </View>
       ) : (
         <Text>Loading...</Text>

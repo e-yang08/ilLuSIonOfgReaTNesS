@@ -153,7 +153,6 @@ export default function MainPage({ navigation }) {
         >
           <View style={styles.toppedView}>
             <View style={styles.modalTopView}>
-              {/* Pass searchText as a prop to SafetyInfo or fetch data here and pass it down */}
               <SafetyInfo address={address} lat={selectedLocation.latitude} long={selectedLocation.longitude} />
               <Pressable
                 style={[styles.button, styles.buttonClose]}
