@@ -18,7 +18,7 @@ Contributed by [Alina](https://www.linkedin.com/in/alina-erofeeva-minerva), [Ere
 
 **Table of Contents**
 
-- [Demo of the application] (#Demo-of-the-application)
+- [Demo of the application](#Demo-of-the-application)
 - [User Story](#User-story)
 - [How to use our application](#How-to-use-our-app)
 - [User Flows](#User-flows)
