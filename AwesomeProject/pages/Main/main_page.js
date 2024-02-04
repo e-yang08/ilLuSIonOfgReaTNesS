@@ -7,7 +7,7 @@ import {
   Modal,
   Pressable,
 } from "react-native";
-import { SearchBar } from "react-native-elements";
+// import { SearchBar } from "react-native-elements";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import MapScreen from "../MapScreen";
 import EmergencyButton from "../../components/EmergencyButton";
@@ -69,27 +69,7 @@ export default function MainPage({ navigation }) {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <EmergencyButton />
       <MapScreen selectedLoc={selectedLocation} />
-      {/* <MapView
-        style={styles.map}
-        region={selectedLocation}
-        showsUserLocation={true}
-        zoomEnabled={true}
-        zoomControlEnabled={true}
-        provider={PROVIDER_GOOGLE}
-      >
-        {selectedLocation && (
-          <Marker
-            coordinate={{
-              latitude: selectedLocation.latitude,
-              longitude: selectedLocation.longitude,
-            }}
-            title={"Selected Location"}
-          />
-        )}
-      </MapView> */}
-
       <View style={styles.searchContainer}>
         {/* </View> */}
         <GooglePlacesAutocomplete
@@ -167,6 +147,7 @@ export default function MainPage({ navigation }) {
           </View>
         </View>
       </Modal>
+      <EmergencyButton />
     </SafeAreaView>
   );
 }

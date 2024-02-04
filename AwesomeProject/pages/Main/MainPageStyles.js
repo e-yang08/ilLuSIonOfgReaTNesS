@@ -25,13 +25,14 @@ const styles = StyleSheet.create({
   },
   searchContainer: {
     position: "absolute",
-    top: 30,
+    top: 80,
     padding: 10,
   },
   toppedView: {
     flex: 1,
     justifyContent: "flex-start",
     alignItems: "center",
+    zIndex: 999,
   },
 
   centeredView: {
@@ -39,6 +40,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginTop: 22,
+    zIndex: 999,
   },
   modalTopView: {
     margin: 20,
@@ -54,6 +56,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
+    zIndex: 999,
   },
   modalView: {
     margin: 20,
@@ -69,6 +72,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
+    zIndex: 999,
   },
   button: {
     borderRadius: 20,
