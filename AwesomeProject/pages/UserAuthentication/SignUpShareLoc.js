@@ -102,7 +102,7 @@ export default function InitialShareLocationPage({ navigation }) {
               borderRadius: 10,
             }}
             onPress={() => {
-              navigation.navigate("Login");
+              navigation.navigate("Main");
             }}
           >
             <Text
