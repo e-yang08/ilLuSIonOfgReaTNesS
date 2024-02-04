@@ -3,7 +3,6 @@ import {
   Text,
   View,
   SafeAreaView,
-  TouchableWithoutFeedback,
   Modal,
   Pressable,
 } from "react-native";
