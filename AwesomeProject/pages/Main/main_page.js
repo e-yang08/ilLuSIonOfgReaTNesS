@@ -10,7 +10,6 @@ import {
 import { SearchBar } from "react-native-elements";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import MapScreen from "../MapScreen";
-import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import EmergencyButton from "../../components/EmergencyButton";
 import styles from "./MainPageStyles";
 import SafetyInfo from "../../backend/SafetyInfo";
@@ -49,7 +48,8 @@ export default function MainPage({ navigation }) {
   const handleTextChange = (text) => {
     setSearchText(text);
   };
-  const [selectedLocation, setSelectedLocation] = useState("");
+
+  const [selectedLocation, setSelectedLocation] = useState(null);
 
   const handleSelectLocation = (data, details) => {
     // console.log(details);
