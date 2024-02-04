@@ -23,7 +23,8 @@ const MapScreen = () => {
   };
 
   const handleMarkerPress = (marker) => {
-    setSelectedMarker(marker);
+    setSelectedMarker(() => marker);
+    console.log('chose marker')
     flashButton(); // Call flashButton when a marker is pressed
   };
 
@@ -35,13 +36,6 @@ const MapScreen = () => {
 const getColorWithAlpha = (hue, saturation, lightness, alpha) => {
   return `hsla(${hue}, ${saturation}%, ${lightness}%, ${alpha})`;
 };
-
-  const polygonCoordinates = neighborhoodData.map(coords => {
-    return {
-        "latitude": coords[1],
-        "longitude": coords[0]
-    };
-  })
   return (
     <View style={styles.container}>
       <MapView
@@ -51,8 +45,9 @@ const getColorWithAlpha = (hue, saturation, lightness, alpha) => {
       longitude: -122.4324,
       latitudeDelta: 0.0922,
       longitudeDelta: 0.0421,
-    }}
-    onPress={() => setSelectedMarker(null)} // Add this line
+        }}
+    provider={PROVIDER_GOOGLE}
+    //onPress={() => setSelectedMarker(null)} // Add this line
 >        
         {bookmarksData.map(marker => (
           <Marker
@@ -85,7 +80,10 @@ const getColorWithAlpha = (hue, saturation, lightness, alpha) => {
     {selectedMarker && (
           <Button
             title="Go Here"
-            onPress={() => openGoogleMaps(selectedMarker.lat, selectedMarker.lon)}
+          onPress={() => {
+            openGoogleMaps(selectedMarker.lat, selectedMarker.lon)
+            setSelectedMarker(null)
+          }}
           />
     )}
     </View>
