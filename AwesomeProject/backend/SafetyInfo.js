@@ -140,15 +140,34 @@ const SafetyInfo = ({ address, lat, long }) => {
 
   function getColor(value) {
     if (value >= 0 && value <= 24) {
-      return "green";
+      return "#168c14"; // green
     } else if (value >= 25 && value <= 49) {
-      return "gold";
+      return "#ebab34"; // yellow/gold
     } else if (value >= 50 && value <= 74) {
-      return "orange";
+      return "#ed8134"; // orange
     } else if (value >= 75 && value <= 100) {
-      return "red";
+      return "#c21515"; // red
     }
   }
+
+  function safetyAdvice(value) {
+    if (value >= 0 && value <= 24) {
+      return "#168c14"; // green
+    } else if (value >= 25 && value <= 49) {
+      return "#ebab34"; // yellow/gold
+    } else if (value >= 50 && value <= 74) {
+      return "#ed8134"; // orange
+    } else if (value >= 75 && value <= 100) {
+      return "#c21515"; // red
+    }
+  }
+//   lgbtq: 0,
+//   medical: 0,
+//   overall: 0,
+//   physicalHarm: 0,
+//   politicalFreedom: 0,
+//   theft: 0,
+//   women: 0,
 
   return (
     <View>
@@ -169,7 +188,10 @@ const SafetyInfo = ({ address, lat, long }) => {
       safety !== "" ? (
         <View>
           <Text style={{ fontWeight: "bold", fontSize: 18 }}>
-            📍 Danger Around {address}
+            📍{address.split(",")[0].trim()}
+          </Text>
+          <Text style={{ fontWeight: "bold", fontSize: 10 }}>
+            📍{safetyAdvice(safety)}
           </Text>
           <Text
             style={{
