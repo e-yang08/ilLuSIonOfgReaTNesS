@@ -136,7 +136,7 @@ export default function MainPage({ navigation }) {
         <View style={styles.toppedView}>
           <View style={styles.modalTopView}>
             {/* Pass searchText as a prop to SafetyInfo or fetch data here and pass it down */}
-            <SafetyInfo address={searchText} />
+            <SafetyInfo address={searchText} locInfo={selectedLocation} />
             <Pressable
               style={[styles.button, styles.buttonClose]}
               onPress={() => setAddressModalVisible(!addressModalVisible)}
