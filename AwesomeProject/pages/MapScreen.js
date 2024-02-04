@@ -45,7 +45,12 @@ const MapScreen = ({ selectedLoc }) => {
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         }}
-        region={selectedLoc}
+        region={ selectedLoc ? ({
+          latitude: selectedLoc.latitude+0.02,
+          longitude: selectedLoc.longitude,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
+        }) : selectedLoc}
         showsUserLocation={true}
         zoomEnabled={true}
         zoomControlEnabled={true}
@@ -98,13 +103,15 @@ const MapScreen = ({ selectedLoc }) => {
       </MapView>
 
       {selectedMarker && (
+        <View style={{top: '12%', marginBottom: '2%'}}>
         <Button
-          title="Go Here"
+          title={'Get Directions to ' + selectedMarker.description}
           onPress={() => {
             openGoogleMaps(selectedMarker.lat, selectedMarker.lon);
             setSelectedMarker(null);
           }}
         />
+        </View>
       )}
     </View>
   );
