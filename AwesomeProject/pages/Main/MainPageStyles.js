@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   },
   searchContainer: {
     position: "absolute",
-    top: 80,
+    top: '5%',
     padding: 10,
   },
   toppedView: {

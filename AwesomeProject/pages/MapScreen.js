@@ -103,13 +103,15 @@ const MapScreen = ({ selectedLoc }) => {
       </MapView>
 
       {selectedMarker && (
+        <View style={{top: '12%', marginBottom: '2%'}}>
         <Button
-          title="Go Here"
+          title={'Get Directions to ' + selectedMarker.description}
           onPress={() => {
             openGoogleMaps(selectedMarker.lat, selectedMarker.lon);
             setSelectedMarker(null);
           }}
         />
+        </View>
       )}
     </View>
   );
