@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { View, Text } from "react-native";
 import Geocoder from "react-native-geocoding";
 import { GOOGLE_API_KEY, AMADEUS_CLIENT_ID, AMADEUS_CLIENT_SECRET } from "@env";
+// import { LinearGradient } from "expo-linear-gradient";
 
 const SafetyInfo = ({ address, lat, long }) => {
   const [coords, setCoords] = useState("loading...");
@@ -150,24 +151,29 @@ const SafetyInfo = ({ address, lat, long }) => {
     }
   }
 
+  // function to generate message
   function safetyAdvice(value) {
-    if (value >= 0 && value <= 24) {
-      return "#168c14"; // green
-    } else if (value >= 25 && value <= 49) {
-      return "#ebab34"; // yellow/gold
-    } else if (value >= 50 && value <= 74) {
-      return "#ed8134"; // orange
-    } else if (value >= 75 && value <= 100) {
-      return "#c21515"; // red
+    if (value.overall <= 24) {
+      return "Enjoy your day!";
+    } else if (value.theft >= 40) {
+      return "Watch out your bags and belongings!";
+    } else if ((value.women >= 40) | (value.lgbtq >= 40)) {
+      return "You might want to go out in a group.";
+    } else if (value.physicalHarm >= 40) {
+      return "Bring pepper spray for protection.";
+    } else if (value.politicalFreedom >= 40) {
+      return "We value freedom but also your safety.";
+    } else {
+      return "Enjoy your day! (Make sure location is shared just in case :)";
     }
   }
-//   lgbtq: 0,
-//   medical: 0,
-//   overall: 0,
-//   physicalHarm: 0,
-//   politicalFreedom: 0,
-//   theft: 0,
-//   women: 0,
+  //   lgbtq: 0,
+  //   medical: 0,
+  //   overall: 0,
+  //   physicalHarm: 0,
+  //   politicalFreedom: 0,
+  //   theft: 0,
+  //   women: 0,
 
   return (
     <View>
@@ -187,22 +193,26 @@ const SafetyInfo = ({ address, lat, long }) => {
       ) : // Conditional rendering based on safety data
       safety !== "" ? (
         <View>
-          <Text style={{ fontWeight: "bold", fontSize: 18 }}>
+          <Text style={{ fontWeight: "bold", fontSize: 18, marginBottom: 5 }}>
             📍{address.split(",")[0].trim()}
           </Text>
-          <Text style={{ fontWeight: "bold", fontSize: 10 }}>
-            📍{safetyAdvice(safety)}
+          <Text style={{ fontWeight: "bold", fontSize: 14, marginBottom: 5 }}>
+            {safetyAdvice(safety)}
           </Text>
           <Text
             style={{
-              color: "darkgrey",
-              fontWeight: "bold",
-              marginBottom: 10,
+              color: "grey",
+              marginBottom: 20,
               marginRight: 1,
+              fontSize: 12,
             }}
           >
             Likelihood of danger from 1 (safe) to 100 (dangerous).
           </Text>
+          {/* <View style={{ width: "100%", height: 50 }}>
+            <LinearGradient colors={["#168c14", "#c21515"]} style={{ flex: 1 }}>
+            </LinearGradient>
+          </View> */}
           <Text
             style={{
               color: "black",
@@ -246,7 +256,7 @@ const SafetyInfo = ({ address, lat, long }) => {
             </Text>
           </Text>
           <Text style={{ color: "black", fontWeight: "bold" }}>
-            Medical:{" "}
+            Medical Conerns:{" "}
             <Text
               style={{ color: getColor(safety.medical), fontWeight: "bold" }}
             >
