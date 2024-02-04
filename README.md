@@ -9,7 +9,7 @@ Guardianess
 
 "Guardianess" is a mobile application created by 4 passionate female engineering students to elevate women's safety. In our personal experience, we did not feel particularly safe on the streets of San Francisco, US. There is no application with centralized information about safety and tangible sources on where to go in a dangerous situation.
 
-In an emergency scenario, one is likely to panic and feel frightened. The appplication provides a sense of assurance when navigating through the streets, provides a tangible sense of security, and potentially could save lives in an emergency. 
+In an emergency scenario, one is likely to panic and feel frightened. The application provides a sense of assurance when navigating through the streets, provides a tangible sense of security, and potentially could save lives in an emergency. 
 
 Submitted to Black Wings Hack 2024 as a team `Illusion of Greatness`
 
@@ -33,9 +33,9 @@ Feature: Check how safe a location is
   Scenario: User wants to visit a new location
     Given I'm a logged-in User
     When I go to the Main page
-    And I search a location
-    Then I see safety score of the location
-    And recieve advice on safety measures
+    And I search for a location
+    Then I see the safety score of the location
+    And receive advice on safety measures
 ```
 
 ```gherkin=
@@ -69,7 +69,7 @@ If you are a total beginner to this, start here!
 2. `npm install` to install dependencies
 3. Install `ExpoGo` from App Store/Play Market
 4. Run`npx expo start` to build the app
-5. Scan the QR code with camera (iOS) or ExpoGo (Android)
+5. Scan the QR code with a camera (iOS) or ExpoGo (Android)
 
 
 ## User flows
@@ -80,7 +80,7 @@ In the following user flows, we show
 - 3 features
     - A: Safety level check upon location search
     - B: Emergency button press
-    - C: Check route to the closest safe spot when you're in danger
+    - C: Check the route to the closest safe spot when you're in danger
 
 ```mermaid
 sequenceDiagram
@@ -92,7 +92,7 @@ OUR APP->>User: 3. Ask location sharing
 
 User ->>OUR APP: 4. Share Location
 
-User-->> OUR APP: A.Check the safety of area
+User-->> OUR APP: A.Check the safety of the area
 
 Note right of OUR APP: (Render Google Map)
 
@@ -107,7 +107,7 @@ OUR APP-->>Google Map: C2. Redirect users to directions
 
 ## Project Timeline
 ---
-Times provided are in GMT.
+The times provided are in GMT.
 
 ```mermaid
 gantt
@@ -138,12 +138,10 @@ If we have more time to develop, here are some  features we find meaningful to i
 - Expansion to more cities across the US and beyond
 - Community features
 - Widget on mobile devices to activate the nearest safe location search
-- Call car-sharing application/taxi to pick up when you're in danger
+- Call a car-sharing application/taxi to pick you up when you're in danger
 - Motion tracker empowered by Machine Learning
 
 
 ## Appendix and FAQ
 
-:::info
-**Find this document incomplete?** Leave a comment!
-:::
+:information_source:	**Find this document incomplete?** Leave a comment!
