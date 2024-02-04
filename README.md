@@ -1,71 +1,113 @@
----
-title: 'Awesome App'
-disqus: hackmd
----
-
-Awesome App
+Guardianess
 ===
 <!-- ![downloads](https://img.shields.io/github/downloads/atom/atom/total.svg)
 ![build](https://img.shields.io/appveyor/ci/:user/:repo.svg)
 ![chat](https://img.shields.io/discord/:serverId.svg)
  -->
  
-:::success
-Welcome! Thank you for visiting our page.
-It is a mobile application created by 4 passionate women engineering students to elevate women's safety.
+:tada:	Welcome! Thank you for visiting our page!
 
-Submitted to Black Wings Hack 2024 as a team `Illution of Greatness`
+"Guardianess" is a mobile application created by 4 passionate female engineering students to elevate women's safety. In our personal experience, we did not feel particularly safe on the streets of San Francisco, US. There is no application with centralized information about safety and tangible sources on where to go in a dangerous situation.
+
+In an emergency scenario, one is likely to panic and feel frightened. The appplication provides a sense of assurance when navigating through the streets, provides a tangible sense of security, and potentially could save lives in an emergency. 
+
+Submitted to Black Wings Hack 2024 as a team `Illusion of Greatness`
 
 
-Contributed by [Alina](https://www.linkedin.com/in/alina-erofeeva-minerva), [Erela](https://linkedin.com/in/erela-yang-snow), [Ivanna](https://www.linkedin.com/in/ivanna-kreshchenetska/), & [Polina](https://www.linkedin.com/in/polina-vishnevskaya/) with <33
-:::
+Contributed by [Alina](https://www.linkedin.com/in/alina-erofeeva-minerva), [Erela](https://linkedin.com/in/erela-yang-snow), [Ivanna](https://www.linkedin.com/in/ivanna-kreshchenetska/), & [Polina](https://www.linkedin.com/in/polina-vishnevskaya/) with :heartpulse:.
 
 **Table of Contents**
 
-[TOC]
+- [User Story](#User-story)
+- [How to use our application](#How-to-use-our-app)
+- [User Flows](#User-flows)
+- [Project Timeline](#Project-timeline)
+- [Future Directions](#Future-directions)
+- [Appendix and FAQ](#Appendix-and-FAQ)
 
-## How to use our product
-There are following two ways to check our product
-- A: Clone repository
-- B: Access Expo Go website
+## User story
+---
+```gherkin=
+Feature: Check how safe a location is
 
-**A: Clone repository**
-1. Clone our repository
+  Scenario: User wants to visit a new location
+    Given I'm a logged-in User
+    When I go to the Main page
+    And I search a location
+    Then I see safety score of the location
+    And recieve advice on safety measures
+```
+
+```gherkin=
+Feature: Send an emergency signal to chosen contacts
+  Scenario: User is in a dangerous situation
+    Given I'm a logged-in User
+    When I go to the Main page
+    And I click "Emergency" for 3 seconds
+    Then my chosen contacts are notified about an emergency 
+    with my geolocation  
+    And I receive directions to the closest safe place
+```
+```gherkin=
+Feature: Find the closest safe location
+
+  Scenario: User feels unsafe
+    Given I'm a logged-in User
+    When I go to the Main page
+    And I click on any of the bookmarked safe places
+    Then the app calculates the route
+    And I see the route information on Google Maps
+```
+
+
+
+## How to use our app
+
+If you are a total beginner to this, start here!
+
+1. Clone our repository `git clone <url>`
 2. `npm install` to install dependencies
-3. Install `ExpoGo` from App Store
-4. `npx expo start`
+3. Install `ExpoGo` from App Store/Play Market
+4. Run`npx expo start` to build the app
+5. Scan the QR code with camera (iOS) or ExpoGo (Android)
 
-**B: Access Expo Go website**
 
-User flows
+## User flows
 ---
 
 In the following user flows, we show 
 - the user registration process (Numbered `1-4`)
-- 2 features
+- 3 features
     - A: Safety level check upon location search
-    - B: Check route to the closest safe spot when you're in danger
+    - B: Emergency button press
+    - C: Check route to the closest safe spot when you're in danger
 
-```sequence
-User->OUR APP: 1. Register App
+```mermaid
+sequenceDiagram
+User->>OUR APP: 1. Register App
 
 Note right of OUR APP: 2. Store user info & emergency contacts
 
-OUR APP->User: 3. Ask location sharing
+OUR APP->>User: 3. Ask location sharing
 
-User ->OUR APP: 4. Share Location
+User ->>OUR APP: 4. Share Location
 
-User--> OUR APP: A.Check the safety of area
+User-->> OUR APP: A.Check the safety of area
 
 Note right of OUR APP: (Render Google Map)
 
-User--> OUR APP: B1. Check routes to the safe spot nearby
+User-->> OUR APP: B1. Press Emergency Button
 
-OUR APP-->Google Map: B2. Redirect users for routing
+OUR APP-->>User: B2. Notify contacts with geolocation
+
+User-->> OUR APP: C1. Check routes to the safe spot nearby
+
+OUR APP-->>Google Map: C2. Redirect users to directions
 ```
 
-Project Timeline
+## Project Timeline
 ---
+Times provided are in GMT.
 
 ```mermaid
 gantt
@@ -89,12 +131,19 @@ section Frontend
 Final Submission: milestone, m1, 2024-02-04 16:00, 1m
 ```
 
-Future Ideas
+## Future Directions
 ---
+
 If we have more time to develop, here are some  features we find meaningful to implement on top of the current version.
-- widget on mobile devices to activate the nearest safe location search
-- call car-sharing application/taxi to pick up when you're in danger
-- motion tracker with Machine Learning
+- Expansion to more cities across the US and beyond
+- Community features
+- Widget on mobile devices to activate the nearest safe location search
+- Call car-sharing application/taxi to pick up when you're in danger
+- Motion tracker empowered by Machine Learning
 
 
 ## Appendix and FAQ
+
+:::info
+**Find this document incomplete?** Leave a comment!
+:::
