@@ -64,9 +64,17 @@ Feature: Check how safe a location is
     Then I see the safety score of the location
     And receive advice on safety measures
 ```
+```gherkin=
+Feature: See a safety ranking of the neighborhoods
+
+    Given I'm a logged-in User
+    When I go to the Main page
+    The app shows how safe each neighborhood is, the darker the color, the more dangerous it is.
+```
 
 ```gherkin=
 Feature: Send an emergency signal to chosen contacts
+
   Scenario: User is in a dangerous situation
     Given I'm a logged-in User
     When I go to the Main page
