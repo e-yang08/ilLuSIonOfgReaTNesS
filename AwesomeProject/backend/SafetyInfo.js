@@ -3,10 +3,8 @@ import { View, Text } from "react-native";
 import Geocoder from "react-native-geocoding";
 import { GOOGLE_API_KEY, AMADEUS_CLIENT_ID, AMADEUS_CLIENT_SECRET } from "@env";
 
-const SafetyInfo = ({ address }) => {
+const SafetyInfo = ({ address, lat, long }) => {
   const [coords, setCoords] = useState("loading...");
-  const [lat, setLat] = useState("");
-  const [long, setLong] = useState("");
   const [safety, setSafety] = useState("");
   const [loading, setIsLoading] = useState(false);
   const [token, setToken] = useState("");
@@ -110,35 +108,35 @@ const SafetyInfo = ({ address }) => {
     }
   }, [lat, long, token]);
 
-  useEffect(() => {
-    if (!address) return; // Exit if no address is provided
+  // useEffect(() => {
+  //   if (!address) return; // Exit if no address is provided
 
-    Geocoder.init(GOOGLE_API_KEY, { language: "en" });
-    Geocoder.from(
-      address,
-      // Hard-coded bounds for San Francisco
-      {
-        northeast: { lat: 37.83, lng: -122.34 },
-        southwest: { lat: 37.63, lng: -122.55 },
-      }
-    )
-      .then((json) => {
-        const location = json.results[0].geometry.location;
-        setLat(location.lat);
-        setLong(location.lng);
-        const latLngString = `${location.lat}, ${location.lng}`;
-        setCoords(latLngString);
-        // Now that lat and long are updated, getSafetyRating will be triggered
-      })
-      .catch((error) => {
-        if (error.origin.status === "ZERO_RESULTS") {
-          setError(
-            "No results were found. Please try entering the address again."
-          );
-        }
-        console.log("⚠️⚠️⚠️⚠️⚠️ERROR!!", error);
-      });
-  }, [address]);
+  //   Geocoder.init(GOOGLE_API_KEY, { language: "en" });
+  //   Geocoder.from(
+  //     address,
+  //     // Hard-coded bounds for San Francisco
+  //     {
+  //       northeast: { lat: 37.83, lng: -122.34 },
+  //       southwest: { lat: 37.63, lng: -122.55 },
+  //     }
+  //   )
+  //     .then((json) => {
+  //       const location = json.results[0].geometry.location;
+  //       setLat(location.lat);
+  //       setLong(location.lng);
+  //       const latLngString = `${location.lat}, ${location.lng}`;
+  //       setCoords(latLngString);
+  //       // Now that lat and long are updated, getSafetyRating will be triggered
+  //     })
+  //     .catch((error) => {
+  //       if (error.origin.status === "ZERO_RESULTS") {
+  //         setError(
+  //           "No results were found. Please try entering the address again."
+  //         );
+  //       }
+  //       console.log("⚠️⚠️⚠️⚠️⚠️ERROR!!", error);
+  //     });
+  // }, [address]);
 
   function getColor(value) {
     if (value >= 0 && value <= 24) {
@@ -171,7 +169,7 @@ const SafetyInfo = ({ address }) => {
       safety !== "" ? (
         <View>
           <Text style={{ fontWeight: "bold", fontSize: 18 }}>
-            Danger Around {address}
+            📍 Danger Around {address}
           </Text>
           <Text
             style={{
