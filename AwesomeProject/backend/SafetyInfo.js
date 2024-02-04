@@ -3,7 +3,7 @@ import { View, Text } from "react-native";
 import Geocoder from "react-native-geocoding";
 import { GOOGLE_API_KEY, AMADEUS_CLIENT_ID, AMADEUS_CLIENT_SECRET } from "@env";
 
-const SafetyInfo = ({ address }) => {
+const SafetyInfo = ({ address, locInfo }) => {
   const [coords, setCoords] = useState("loading...");
   const [lat, setLat] = useState("");
   const [long, setLong] = useState("");
@@ -36,7 +36,10 @@ const SafetyInfo = ({ address }) => {
   const getSafetyRating = async () => {
     // Function to get the Safety Rating of the state variables of latitude and longitude
 
-    if (!lat || !long) return; // Ensure lat, long, and token are available
+    if (!lat || !long) {
+      console.log("no lat long provided");
+      return; // Ensure lat, long, and token are available
+    }
 
     const radiusInDegrees = 0.5 / 69; // 1 degree = 69 miles
 
@@ -107,38 +110,56 @@ const SafetyInfo = ({ address }) => {
     if (token) {
       // Ensure to call getSafetyRating only when token is available
       getSafetyRating();
+      console.log("getsafetyring");
     }
   }, [lat, long, token]);
 
   useEffect(() => {
-    if (!address) return; // Exit if no address is provided
+    if (!address) {
+      console.log("no address provided");
+      return; // Exit if no address is provided
+    }
 
-    Geocoder.init(GOOGLE_API_KEY, { language: "en" });
-    Geocoder.from(
-      address,
-      // Hard-coded bounds for San Francisco
-      {
-        northeast: { lat: 37.83, lng: -122.34 },
-        southwest: { lat: 37.63, lng: -122.55 },
-      }
-    )
-      .then((json) => {
-        const location = json.results[0].geometry.location;
-        setLat(location.lat);
-        setLong(location.lng);
-        const latLngString = `${location.lat}, ${location.lng}`;
-        setCoords(latLngString);
-        // Now that lat and long are updated, getSafetyRating will be triggered
-      })
-      .catch((error) => {
-        if (error.origin.status === "ZERO_RESULTS") {
-          setError(
-            "No results were found. Please try entering the address again."
-          );
-        }
-        console.log("⚠️⚠️⚠️⚠️⚠️ERROR!!", error);
-      });
-  }, [address]);
+    setLat(locInfo.latitude);
+    setLat(locInfo.longitude);
+    const latLngString = `${locInfo.latitude}, ${locInfo.longitude}`;
+    //   const location = json.results[0].geometry.location;
+    // setLat(location.lat);
+    // setLong(location.lng);
+    // const latLngString = `${location.lat}, ${location.lng}`;
+    setCoords(latLngString);
+  });
+
+  //     Geocoder.init(GOOGLE_API_KEY, { language: "en" });
+  //     Geocoder.from(
+  //       address,
+  //       // Hard-coded bounds for San Francisco
+  //       {
+  //         northeast: { lat: 37.83, lng: -122.34 },
+  //         southwest: { lat: 37.63, lng: -122.55 },
+  //       }
+  //     )
+  //       .then((json) => {
+  //         setLat(locInfo.latitude);
+  //         setLat(locInfo.longitude);
+  //         const latLngString = `${locInfo.latitude}, ${locInfo.longitude}`;
+  //         console.log(json.results[0].geometry.location);
+  //         //   const location = json.results[0].geometry.location;
+  //         // setLat(location.lat);
+  //         // setLong(location.lng);
+  //         // const latLngString = `${location.lat}, ${location.lng}`;
+  //         setCoords(latLngString);
+  //         // Now that lat and long are updated, getSafetyRating will be triggered
+  //       })
+  //       .catch((error) => {
+  //         if (error.origin.status === "ZERO_RESULTS") {
+  //           setError(
+  //             "No results were found. Please try entering the address again."
+  //           );
+  //         }
+  //         console.log("⚠️⚠️⚠️⚠️⚠️ERROR!!", error);
+  //       });
+  //   }, [address]);
 
   function getColor(value) {
     if (value >= 0 && value <= 24) {
